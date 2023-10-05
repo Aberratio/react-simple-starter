@@ -1,0 +1,10 @@
+*.css
+*.svg
+*.cy.js
+*.js
+*.stories.*
+*.d.ts
+*/Illustrations/*
+serviceWorker.ts
+Icon*.tsx
+scripts/*
