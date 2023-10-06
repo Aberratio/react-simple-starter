@@ -1,4 +1,4 @@
-# React Starter Kit with TypeScript, Node.js, Styled Components, Babel, Prettier, ESLint, and Webpack 5
+# React Simple Starter with TypeScript, Node.js, Styled Components, Babel, Prettier, ESLint, and Webpack 5
 
 Welcome to the React Simple Starter repository! This starter kit provides a solid foundation for building modern web applications with React. It comes pre-configured with various tools and technologies to help you get started quickly.
 
@@ -20,8 +20,8 @@ To get started with this starter kit, follow these steps:
 1. Clone the repository:
 
 ```bash
-git clone <repository-url>
-cd <repository-directory>
+git clone https://github.com/Aberratio/react-simple-starter.git
+cd react-simple-starter
 ```
 
 2. Install dependencies:
@@ -51,10 +51,11 @@ In the project directory, you can run:
 
 - **yarn start**: Runs the app in development mode.
 - **yarn build**: Builds the app for production to the build folder.
+- **yarn fix-lint**: Lints the JavaScript/TypeScript code using ESLint and fixes the linting issues in your project.
 - **yarn lint**: Lints the JavaScript/TypeScript code using ESLint.
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [License](LICENSE) file for details.
 
 Happy coding! 🚀
