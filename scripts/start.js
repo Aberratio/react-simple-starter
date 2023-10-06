@@ -5,8 +5,6 @@ process.on("unhandledRejection", (err) => {
   throw err;
 });
 
-require("../config/env");
-
 const fs = require("fs");
 const chalk = require("react-dev-utils/chalk");
 const webpack = require("webpack");
@@ -20,7 +18,9 @@ const {
   prepareUrls,
 } = require("react-dev-utils/WebpackDevServerUtils");
 const openBrowser = require("react-dev-utils/openBrowser");
+const { checkBrowsers } = require("react-dev-utils/browsersHelper");
 
+require("../config/env");
 const paths = require("../config/paths");
 const configFactory = require("../config/webpack.config");
 const createDevServerConfig = require("../config/webpackDevServer.config");
@@ -51,8 +51,6 @@ if (process.env.HOST) {
   );
   console.log();
 }
-
-const { checkBrowsers } = require("react-dev-utils/browsersHelper");
 
 checkBrowsers(paths.appPath, isInteractive)
   .then(() => {
@@ -101,21 +99,13 @@ checkBrowsers(paths.appPath, isInteractive)
       urls.lanUrlForConfig
     );
     const devServer = new WebpackDevServer(compiler, serverConfig);
+
     devServer.listen(port, HOST, (err) => {
       if (err) {
         return console.log(err);
       }
       if (isInteractive) {
         clearConsole();
-      }
-
-      if (process.env.NODE_PATH) {
-        console.log(
-          chalk.yellow(
-            "Setting NODE_PATH to resolve modules absolutely has been deprecated in favor of setting baseUrl in jsconfig.json (or tsconfig.json if you are using TypeScript) and will be removed in a future major release of create-react-app."
-          )
-        );
-        console.log();
       }
 
       console.log(chalk.cyan("Starting the development server...\n"));

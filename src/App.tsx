@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 export const App = () => {
-  return <Box>Hello!</Box>;
+  return <Box>Hello! </Box>;
 };
 
 const Box = styled.div`

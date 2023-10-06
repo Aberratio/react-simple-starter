@@ -1,9 +1,10 @@
 const path = require("path");
-const paths = require("./paths");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
 const getClientEnvironment = require("./env");
+const paths = require("./paths");
 
 module.exports = function (webpackEnv) {
   const isEnvDevelopment = webpackEnv === "development";
@@ -20,33 +21,13 @@ module.exports = function (webpackEnv) {
       webSocketServer: "ws",
       allowedHosts: "all",
     },
-    mode: isEnvProduction ? "production" : isEnvDevelopment && "development",
+    devtool: "source-map",
     entry: [
       isEnvDevelopment &&
         require.resolve("react-dev-utils/webpackHotDevClient"),
       paths.appIndexJs,
     ].filter(Boolean),
-    output: {
-      path: isEnvProduction ? paths.appBuild : undefined,
-      pathinfo: isEnvDevelopment,
-      filename: isEnvProduction
-        ? "my-app.js"
-        : isEnvDevelopment && "static/js/bundle.js",
-      chunkFilename: isEnvProduction
-        ? "[name].[contenthash:8].chunk.js"
-        : isEnvDevelopment && "static/js/[name].chunk.js",
-      publicPath: paths.publicUrlOrPath,
-      devtoolModuleFilenameTemplate: isEnvProduction
-        ? (info) =>
-            path
-              .relative(paths.appSrc, info.absoluteResourcePath)
-              .replace(/\\/g, "/")
-        : isEnvDevelopment &&
-          ((info) =>
-            path.resolve(info.absoluteResourcePath).replace(/\\/g, "/")),
-      globalObject: "this",
-    },
-    devtool: "source-map",
+    mode: isEnvProduction ? "production" : isEnvDevelopment && "development",
     module: {
       rules: [
         {
@@ -69,6 +50,26 @@ module.exports = function (webpackEnv) {
           use: [MiniCssExtractPlugin.loader, "css-loader"],
         },
       ],
+    },
+    output: {
+      path: isEnvProduction ? paths.appBuild : undefined,
+      pathinfo: isEnvDevelopment,
+      filename: isEnvProduction
+        ? "my-app.js"
+        : isEnvDevelopment && "static/js/bundle.js",
+      chunkFilename: isEnvProduction
+        ? "[name].[contenthash:8].chunk.js"
+        : isEnvDevelopment && "static/js/[name].chunk.js",
+      publicPath: paths.publicUrlOrPath,
+      devtoolModuleFilenameTemplate: isEnvProduction
+        ? (info) =>
+            path
+              .relative(paths.appSrc, info.absoluteResourcePath)
+              .replace(/\\/g, "/")
+        : isEnvDevelopment &&
+          ((info) =>
+            path.resolve(info.absoluteResourcePath).replace(/\\/g, "/")),
+      globalObject: "this",
     },
     plugins: [
       new HtmlWebpackPlugin({
